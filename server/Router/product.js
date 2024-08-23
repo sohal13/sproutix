@@ -17,7 +17,7 @@ router.get("/related/:id", getRelatedProducts);
 router.get('/featured', showFeaturedProduct);
 
 
-router.post('/test',verifyUser,(req,res,next)=>{
+router.get('/test',verifyUser,(req,res,next)=>{
     try {
         console.log(req.user.id);
     } catch (error) {
