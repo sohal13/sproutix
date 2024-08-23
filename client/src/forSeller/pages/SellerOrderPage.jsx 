@@ -1,0 +1,79 @@
+import React from 'react';
+import { FaBoxOpen, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+
+const SellerOrderPage = () => {
+  const orders = [
+    {
+      id: 'ORD001',
+      productName: 'Cherry Plant',
+      quantity: 2,
+      price: 900,
+      customerName: 'John Doe',
+      status: 'Shipped',
+      date: '2024-08-17',
+    },
+    {
+      id: 'ORD002',
+      productName: 'Aloe Vera',
+      quantity: 1,
+      price: 300,
+      customerName: 'Jane Smith',
+      status: 'Delivered',
+      date: '2024-08-18',
+    },
+    // Add more orders as needed
+  ];
+
+  return (
+    <div className="bg-gray-100 min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Seller Orders</h1>
+
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <table className="w-full text-left">
+            <thead className="bg-green-600 text-white">
+              <tr>
+                <th className="p-4">Order ID</th>
+                <th className="p-4">Product</th>
+                <th className="p-4">Quantity</th>
+                <th className="p-4">Price</th>
+                <th className="p-4">Customer</th>
+                <th className="p-4">Status</th>
+                <th className="p-4">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order.id} className="border-b last:border-b-0">
+                  <td className="p-4">{order.id}</td>
+                  <td className="p-4">{order.productName}</td>
+                  <td className="p-4">{order.quantity}</td>
+                  <td className="p-4">₹{order.price}</td>
+                  <td className="p-4">{order.customerName}</td>
+                  <td className="p-4">
+                    {order.status === 'Delivered' ? (
+                      <div className="flex items-center text-green-600">
+                        <FaCheckCircle className="mr-2" /> Delivered
+                      </div>
+                    ) : order.status === 'Shipped' ? (
+                      <div className="flex items-center text-yellow-500">
+                        <FaBoxOpen className="mr-2" /> Shipped
+                      </div>
+                    ) : (
+                      <div className="flex items-center text-red-600">
+                        <FaTimesCircle className="mr-2" /> Canceled
+                      </div>
+                    )}
+                  </td>
+                  <td className="p-4">{order.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SellerOrderPage;
