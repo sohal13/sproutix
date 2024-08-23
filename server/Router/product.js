@@ -19,7 +19,7 @@ router.get('/featured', showFeaturedProduct);
 
 router.get('/test',verifyUser,(req,res,next)=>{
     try {
-        console.log(req.user.id);
+        res.send(req.user.id);
     } catch (error) {
         console.log(error);
     }

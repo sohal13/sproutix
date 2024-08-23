@@ -25,7 +25,6 @@ const connectToDB = async () => {
 
 // Configure CORS for production
 const allowedOrigins = [
-  'https://your-frontend-domain.com', // Replace with your production frontend URL
   'http://localhost:5173', // Optional: Include your local development URL
 ];
 
@@ -41,12 +40,12 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 
 }));
-app.options('/api/*', cors()); // Preflight support for all routes under /api
+
 app.use('/api/stripe', stripewebhookRouter);
 //midlleware
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 // Use compression middleware
 app.use(compression({ 
   level: 6, // Compression level (default is 6)

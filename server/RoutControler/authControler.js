@@ -55,6 +55,7 @@ export const userLogin=async(req,res,next)=>{
             secure: true, // Adjust for production
             sameSite: 'None',
             path: '/' ,// Ensure accessibility
+            maxAge: 1000 * 60 * 60 * 24 * 730, // 2 years
         }).status(200).json({
             message:"You Are Login Successfully!!",
             user:isUser,
