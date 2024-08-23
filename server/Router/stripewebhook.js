@@ -9,7 +9,7 @@ dotenv.config();
 const router = express.Router();
 const stripeKey = stripe(process.env.STRIPE_SECRET_KEY);
 let endpointSecret;
-endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+//endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 console.log(endpointSecret);
   // Webhook route
   router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
