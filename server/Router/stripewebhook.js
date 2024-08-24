@@ -12,7 +12,7 @@ let endpointSecret;
 endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 console.log(endpointSecret);
   // Webhook route
-  router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  router.post('/webhooks', express.raw({ type: 'application/json' }), async (req, res) => {
     console.log('Webhook received');
     const sig = req.headers['stripe-signature'];
     let data;
@@ -21,21 +21,22 @@ console.log(endpointSecret);
         console.log("in if");
         let event;
         try {
-            console.log("in try = ",stripeKey.webhooks.constructEvent(req.body, sig, endpointSecret));
           event = stripeKey.webhooks.constructEvent(req.body, sig, endpointSecret);
           data = event.data.object;
           eventType = event.type;
-          console.log(" if data = ",data ," eventType =",eventType);
         } catch (err) {
-            console.log("in catch = ",err);
           res.status(400).send(`Webhook Error: ${err.message}`);
           return;
         }
     }else{
-        console.log("in else");
-        data = req.body.data.object;
-        eventType = req.body.type;
-        console.log(" else data = ",data ," eventType =",eventType);
+        try {
+            data = req.body.data.object;
+            eventType = req.body.type;
+        } catch (error) {
+            res.status(400).send(`Webhook Error: ${err.message}`);
+          return;
+        }
+       
     }
 
     console.log(`Received event type: ${eventType}`);
