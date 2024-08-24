@@ -5,7 +5,6 @@ import Order from '../Schema/orderSchema.js';
 import stripe from 'stripe';
 import { verifyUser } from "../utils/verifyUser.js";
 import { createError } from "../utils/error.js";
-import mongoose from "mongoose";
 dotenv.config();
 
 

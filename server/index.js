@@ -41,7 +41,7 @@ app.use(cors({
 
 }));
 
-app.use('/api/stripe', stripewebhookRouter);
+app.use('/stripe', stripewebhookRouter);
 //midlleware
 app.use(cookieParser());
 app.use(express.json());
