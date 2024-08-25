@@ -57,7 +57,7 @@ const SellerMainPage = () => {
             </li>
             <li className={`mb-4 ${activeSection === 'profile' ? 'bg-green-600' : ''}`}>
               <Link 
-                to="/seller/profile" 
+                to="/user/profile" 
                 onClick={() => setActiveSection('profile')}
                 className="flex items-center p-3 rounded hover:bg-green-700 cursor-pointer"
               >

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import apiClient from "../../apiClient";
 import Layout from "./Components/Layout/Layout";
 import { FaFilter, FaTimes } from "react-icons/fa";
 import ProductCard from "../../components/ProductCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import axios from "axios";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -41,7 +41,7 @@ const SearchPage = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const { data } = await apiClient.get('/api/product/search', { params: searchQuery });
+        const { data } = await axios.get('/api/product/search', { params: searchQuery });
         setProducts(data.products);
         setTotal(data.total);
       } catch (err) {

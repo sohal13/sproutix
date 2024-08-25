@@ -7,8 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const navigate = useNavigate();
-    const API_BASE_URL= import.meta.env.VITE_API_BASE_URL;
-console.log(API_BASE_URL);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,7 +28,7 @@ console.log(API_BASE_URL);
     if(formData.password !== formData.confpassword) return toast.error("Password Not Matching!!")
     setLoading(true);
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
+      const response = await axios.post(`/api/auth/register`, formData);
       toast.success('Registration successful!');
       navigate('/login')
     } catch (error) {
@@ -43,7 +41,7 @@ console.log(formData);
   return (
     <div className="flex items-center justify-center min-h-screen bg-green-800 p-2">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">PlanteBuy Register</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">SproutiX Register</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="name">Name</label>

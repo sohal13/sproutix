@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaTruck, FaUser, FaBoxOpen, FaMoneyCheck, FaShippingFast } from 'react-icons/fa';
-import apiClient from '../../apiClient';
+import axios from 'axios';
+
 
 const OrderDetail = () => {
   const { id } = useParams(); // Get order ID from the URL
@@ -11,7 +12,7 @@ const OrderDetail = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await apiClient.get(`/api/order/orderdetail/${id}`); // Replace with your actual endpoint
+        const response = await axios.get(`/api/order/orderdetail/${id}`); // Replace with your actual endpoint
         setOrder(response.data);
         setLoading(false);
       } catch (error) {

@@ -3,7 +3,6 @@ import axios from 'axios';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaTrash, FaEye, FaPlus, FaSearch, FaFilter } from 'react-icons/fa';
-import apiClient from '../../apiClient';
 
 import { Link } from 'react-router-dom';
 
@@ -20,7 +19,7 @@ const ManageProducts = () => {
     });
 
     useEffect(() => {
-        apiClient.get('/api/product/mylisting')
+        axios.get('/api/product/mylisting')
             .then((response) => {
                 setProducts(response.data);
                 setFilteredProducts(response.data);

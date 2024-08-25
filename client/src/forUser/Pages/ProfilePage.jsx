@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import apiClient from '../../apiClient';
 import Layout from './Components/Layout/Layout';
 import AccountSettings from './Components/ProfilePageComponets/AccountSetting';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -8,11 +7,14 @@ import Orders from './Components/ProfilePageComponets/Orders';
 import { userAuth } from '../../contextAPI/authContext';
 import SellerMainPage from '../../forSeller/pages/SellerMainPage';
 import SellerDashBord from '../../forSeller/pages/SellerDashBord';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ProfilePage = () => {
     const {authUser}=userAuth();
+    const navigate= useNavigate();
     const [user, setUser] = useState(null);
+    const [notify , setNotify] = useState(null);
     const [activeTab, setActiveTab] = useState('profile');
     const [loading, setLoading] = useState(false);
 
@@ -21,35 +23,59 @@ const ProfilePage = () => {
         const fetchUserProfile = async () => {
             setLoading(true);
             try {
-                const response = await apiClient.get('/api/user/profile');
-            setLoading(false);
+                const response = await axios.get('/api/user/profile');
+                setLoading(false);
                 setUser(response.data);
+                const notification = await axios.get('/api/user/application-status');
+                setNotify(notification.data);
             } catch (error) {
-            setLoading(false);
-                toast.error('Error fetching profile data');
+                setLoading(false);
+                toast.error(error.response.data.message);
             }
         };
 
         fetchUserProfile();
-    }, []);
-
+    }, [activeTab]);
+console.log(notify);
     const renderProfileInfo = () => (
-        <div className="p-4 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl font-semibold mb-4">Profile Information</h2>
+        <>
+        <div className="relative p-4 bg-white shadow-lg rounded-lg mb-4">
+            <h2 className="text-2xl font-semibold mb-2">Profile Information</h2>
             <div className="space-y-2">
                 <p><strong>Name:</strong> {user?.name}</p>
                 <p><strong>Email:</strong> {user?.email}</p>
                 <p><strong>Phone:</strong> {user?.phone || 'N/A'}</p>
             </div>
+            <button onClick={()=>navigate(`/seller/sellerdetails/${notify._id}`)} className='absolute top-1 right-1 bg-green-500 p-1 rounded cursor-pointer hover:bg-green-700'>More details</button>
         </div>
+          <div className="p-4 bg-white shadow-lg rounded-lg text-sm">
+          <h2 className="text-2xl font-semibold mb-2">Notifications</h2>
+         {notify && notify?.status === "pending" ? (
+         <div className="flex justify-between bg-yellow-200 p-1 rounded">
+            <h1>
+            <p>Become Selller Application</p>
+            {notify?.status === "approved" && <p className='font-bold'><span className='font-bold text-green-600'>APPROVED</span>Check Your Email for Further Verification <span className='text-green-600'>{notify?.contact?.email}</span></p>}
+            </h1>
+            <p>
+                status : <span className={`p-1  bg-gray-300 rounded ${notify?.status === "approved" && "bg-green-400"} ${notify?.status === "rejected" && "bg-red-400-400"}`}>{notify?.status}</span>
+            </p>
+          </div>
+          ):(
+          <div className="">
+            <h1>
+               No Notification yet!!
+            </h1>
+            
+          </div>
+          )} 
+      </div>
+      </>
     );
-
     const renderOrderHistory = () => (
         <div>
            <Orders user={authUser}/>
         </div>
     );
-
     const renderDashboard = () => (
         <div className="p-1 bg-white shadow-lg rounded-lg">
             <div className='flex items-center justify-between'>

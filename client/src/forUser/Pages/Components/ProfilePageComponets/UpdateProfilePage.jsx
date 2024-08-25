@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import apiClient from '../../../../apiClient';
 import { storage } from '../../../../firebaseConfig';
 import { userAuth } from '../../../../contextAPI/authContext';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
+import axios from 'axios';
 
 
 const UpdateProfilePage = () => {
@@ -28,7 +28,7 @@ const UpdateProfilePage = () => {
         const fetchUser = async () => {
             setLoading(true);
             try {
-                const response = await apiClient.get(`/api/user/profile`);
+                const response = await axios.get(`/api/user/profile`);
             setLoading(false);
                 setUser(response.data);
             } catch (error) {
@@ -74,7 +74,7 @@ const UpdateProfilePage = () => {
             async () => {
                 try {
                     const photoURL = await getDownloadURL(fileRef);
-                    const response = await apiClient.put(`/api/user/profile/update/${id}`, { ...user, photo: photoURL });
+                    const response = await axios.put(`/api/user/profile/update/${id}`, { ...user, photo: photoURL });
                     toast.success('Profile updated successfully');
                     localStorage.setItem('plantebuy_user', JSON.stringify(response.data));
                     setauthUser((prevUser) => ({ ...prevUser, photo: photoURL }));

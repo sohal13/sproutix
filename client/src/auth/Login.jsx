@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const { setauthUser } = userAuth();
 
   const [formData, setFormData] = useState({
@@ -31,7 +30,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
+      const response = await axios.post(`/api/auth/login`, formData);
       const { token, user } = response.data;
       localStorage.setItem('plantebuy_user', JSON.stringify(user));
       // Save token in cookies
@@ -55,7 +54,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-green-800 p-2">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">PlanteBuy Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">SproutiX Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="phone">Phone</label>

@@ -4,10 +4,10 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ProductImageGallery from './SinglePageComp/ProductImageGallery';
 import ProductInfo from './SinglePageComp/ProductInfo';
 import ProductReviews from './SinglePageComp/ProductReviews';
-import apiClient from '../apiClient';
 import Layout from '../forUser/Pages/Components/Layout/Layout';
 import RelatedProducts from './SinglePageComp/RelatedProducts';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -26,14 +26,14 @@ const SingleProduct = () => {
   }, [id]);
   const fetchProduct = async () => {
     try {
-      const response = await apiClient.get(`/api/product/this/${id}`);
+      const response = await axios.get(`/api/product/this/${id}`);
       setProduct(response.data);
        // Fetch related products
-       const relatedResponse = await apiClient.get(`/api/product/related/${id}`);
+       const relatedResponse = await axios.get(`/api/product/related/${id}`);
        setRelatedProducts(relatedResponse.data || [])
        //monetring user
        try {
-        const trackUser = await apiClient.post('/api/user/track-activity', {
+        const trackUser = await axios.post('/api/user/track-activity', {
           productId:id,
           action:'view',
       });

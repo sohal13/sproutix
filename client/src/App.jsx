@@ -21,6 +21,9 @@ import CheckoutSuccessPage from "./forUser/Pages/Components/CheckOutComponents/C
 import OrderDatail from "./forUser/Pages/Components/ProfilePageComponets/OrderDatail";
 import OrderPage from "./forSeller/pages/OrderPage";
 import OrderDetail from "./forSeller/pages/OrderDetsil";
+import SellerApplicationForm from "./forUser/Pages/Components/ProfilePageComponets/SellerApplicationForm";
+import PostSellerDetails from "./forSeller/pages/PostSellerDetails";
+import SellerDetailPage from "./forSeller/pages/SellerDetailPage";
 
 function App() {
  
@@ -37,6 +40,7 @@ function App() {
       <Route path="/user" element={<ISUser/>}>
       <Route path="profile" element={<ProfilePage/>}/>
       <Route path="profile/update/:id" element={<UpdateProfilePage />} />
+      <Route path="profile/becomeseller/:id" element={<SellerApplicationForm/>} />
       <Route path="order/details/:id" element={<OrderDatail />} />
       <Route path="cart" element={<CartPage/>}/>
       <Route path="checkout-success" element={<CheckoutSuccessPage />} />
@@ -44,6 +48,8 @@ function App() {
       </Route>
       <Route path="/seller" element={<ISSeller/>}>
       <Route path="" element={<SellerMainPage/>}/>
+      <Route path="sellerdetails/:id" element={<SellerDetailPage/>}/>
+      <Route path="updatedetails/:id" element={<PostSellerDetails/>}/>
       <Route path="dashboard" element={<SellerDashBord/>}/>
       <Route path="manageproduct" element={<ManageProducts/>}/>
       <Route path="orders" element={<OrderPage/>}/>

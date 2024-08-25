@@ -30,7 +30,7 @@ const Navbar = () => {
       <nav className="container mx-auto p-4 flex justify-between items-center">
         {/* Logo */}
         <Link to={'/'} className="text-2xl font-bold">
-          PlanteBuy
+          SproutiX
         </Link>
 
         {/* Search Bar for Large Screens */} 
@@ -110,7 +110,7 @@ const Navbar = () => {
       >
         <div className="p-4 flex justify-between items-center">
           <div className="text-2xl font-bold">
-            PlanteBuy
+            SproutiX
           </div>
           <FaTimes size={24} onClick={toggleSidebar} className="cursor-pointer" />
         </div>

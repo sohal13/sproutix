@@ -1,6 +1,6 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { FaCheckCircle, FaTimesCircle, FaBoxOpen, FaFilter, FaSearch, FaEye, FaPhone } from 'react-icons/fa';
-import apiClient from '../../apiClient';
 import { useNavigate } from 'react-router-dom';
 
 const OrderPage = () => {
@@ -14,7 +14,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await apiClient.get('/api/order/seller/orders'); // Replace with your actual endpoint
+        const response = await axios.get('/api/order/seller/orders'); // Replace with your actual endpoint
         setOrders(response.data);
       } catch (error) {
         console.error('Error fetching orders:', error);
