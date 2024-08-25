@@ -4,7 +4,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Register from "./auth/Register";
 import Login from "./auth/Login";
-import ISSeller from "./auth/verify/isSelle";
 import ListProduct from "./forSeller/pages/ListProduct";
 import SellerDashBord from "./forSeller/pages/SellerDashBord";
 import SellerMainPage from "./forSeller/pages/SellerMainPage";
@@ -24,6 +23,7 @@ import OrderDetail from "./forSeller/pages/OrderDetsil";
 import SellerApplicationForm from "./forUser/Pages/Components/ProfilePageComponets/SellerApplicationForm";
 import PostSellerDetails from "./forSeller/pages/PostSellerDetails";
 import SellerDetailPage from "./forSeller/pages/SellerDetailPage";
+import ISSeller from "./auth/verify/ISSelle";
 
 function App() {
  
