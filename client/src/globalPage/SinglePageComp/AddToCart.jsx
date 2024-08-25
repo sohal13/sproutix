@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import CheckoutPageButton from '../../forUser/Pages/Components/CheckOutComponents/CheckOutPageButton';
 import { userAuth } from '../../contextAPI/authContext';
+import apiClient from '../../apiClient';
 
 const AddToCart = ({ productId ,product}) => {
   const {authUser} = userAuth();
@@ -14,10 +14,10 @@ const AddToCart = ({ productId ,product}) => {
     if(!authUser) return navigate(`/login`)
     setLoading(true);
     try {
-      const response = await axios.post('/api/cart/add', { productId , quantity:1 });
+      const response = await apiClient.post('/api/cart/add', { productId , quantity:1 });
       toast.success('Product added to cart!');
       try {
-        const trackUser = await axios.post('/api/user/track-activity', {
+        const trackUser = await apiClient.post('/api/user/track-activity', {
           productId:productId,
           action:'click',
       });

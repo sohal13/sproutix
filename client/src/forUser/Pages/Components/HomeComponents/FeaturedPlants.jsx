@@ -6,8 +6,7 @@ import { toast } from 'react-toastify';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import ProductCard from '../../../../components/ProductCard';
 import { userAuth } from '../../../../contextAPI/authContext';
-import axios from 'axios';
-
+import apiClient from '../../../../apiClient.js'
 const FeaturedPlants = () => {
   const {authUser} = userAuth();
   const [featured , setfeatured] = useState();
@@ -19,7 +18,7 @@ const FeaturedPlants = () => {
   const getfeaturedfeatured=async()=>{
     setLoading(true)
     try {
-      const {data} = await axios.get(`/api/product/featured?userId=${authUser?._id}`);
+      const {data} = await apiClient.get(`/api/product/featured?userId=${authUser?._id}`);
       if(data.success !== true){
         setLoading(false);
         toast.error(data.message)

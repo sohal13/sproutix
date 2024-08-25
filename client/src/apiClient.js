@@ -1,17 +1,14 @@
 // src/utils/axios.js
 import axios from 'axios';
 
-// Base URL for your API
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 // Create an instance of Axios
-const axios = axios.create({
-  baseURL: API_BASE_URL,
+const apiClient = axios.create({
+  baseURL: 'https://sproutix-backend.onrender.com',
   withCredentials: true, // This ensures cookies are sent with requests
 });
 
 // Optionally, you can add request and response interceptors
-axios.interceptors.request.use(
+apiClient.interceptors.request.use(
   (config) => {
     // You can add authorization headers or other configurations here
     // config.headers['Authorization'] = `Bearer ${yourToken}`;
@@ -22,7 +19,7 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
+apiClient.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -32,4 +29,4 @@ axios.interceptors.response.use(
   }
 );
 
-export default axios;
+export default apiClient;
