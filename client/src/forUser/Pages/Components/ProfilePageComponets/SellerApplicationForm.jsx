@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import { useNavigate } from 'react-router';
 import { userAuth } from '../../../../contextAPI/authContext';
+import apiClient from '../../../../apiClient';
 
 const SellerApplicationForm = () => {
   const {authUser} = userAuth();
@@ -18,7 +18,7 @@ const SellerApplicationForm = () => {
     setSuccess(null);
     setErrorMessage('');
     try {
-      await axios.post(`/api/user/becomeseller/${authUser?._id}`, data);
+      await apiClient.post(`/api/user/becomeseller/${authUser?._id}`, data);
       setSuccess('Seller application submitted successfully');
       navigate('/user/profile')
     } catch (error) {

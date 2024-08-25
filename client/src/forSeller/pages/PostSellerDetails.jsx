@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import apiClient from '../../apiClient';
 
 const UpdateSellerForm = () => {
     const navigate = useNavigate();
@@ -97,7 +97,7 @@ const UpdateSellerForm = () => {
         setIsSubmitting(true);
            // Simulate success message
         try {
-            const response = await axios.post(`/api/user/additional-info/${sellerId}`, formData);
+            const response = await apiClient.post(`/api/user/additional-info/${sellerId}`, formData);
             setSuccessMessage('Additional information updated successfully!');
             navigate('/user/profile')
         } catch (error) {

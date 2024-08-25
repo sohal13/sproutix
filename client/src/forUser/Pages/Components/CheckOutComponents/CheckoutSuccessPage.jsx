@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../../../../apiClient';
 
 const CheckoutSuccess = () => {
   const [session, setSession] = useState(null);
@@ -16,7 +16,7 @@ const CheckoutSuccess = () => {
       }
 
       try {
-        const response = await axios.get(`/api/payment/checkout-session/${sessionId}`);
+        const response = await apiClient.get(`/api/payment/checkout-session/${sessionId}`);
         const data = response.data;
         setSession(data);
       } catch (err) {

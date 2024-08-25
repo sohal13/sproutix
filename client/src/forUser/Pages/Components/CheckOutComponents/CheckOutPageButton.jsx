@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import { userAuth } from '../../../../contextAPI/authContext';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import apiClient from '../../../../apiClient';
 
 const CheckoutPageButton = ({product}) => {
   const {authUser}  = userAuth();
@@ -24,7 +24,7 @@ const CheckoutPageButton = ({product}) => {
       }));
       console.log(items);
       // Request to create a checkout session
-      const response = await axios.post('/api/payment/create-checkout-session', {
+      const response = await apiClient.post('/api/payment/create-checkout-session', {
         items: items,
         user: authUser,// Adjust as needed
       });
@@ -32,7 +32,7 @@ const CheckoutPageButton = ({product}) => {
       const { url } = response.data;
       window.location.href = url;
       try {
-        const trackUser = await axios.post('/api/user/track-activity', {
+        const trackUser = await apiClient.post('/api/user/track-activity', {
           productId:id,
           action:'purchase',
       });

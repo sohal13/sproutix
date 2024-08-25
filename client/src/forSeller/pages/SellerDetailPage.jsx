@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router';
+import apiClient from '../../apiClient';
 
 const SellerDetailPage = () => {
     const {id}=useParams();
@@ -16,7 +16,7 @@ const SellerDetailPage = () => {
   const getSellerData = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`/api/user/seller-info/${id}`);
+      const res = await apiClient.get(`/api/user/seller-info/${id}`);
       setFormData(res.data);
       setLoading(false);
     } catch (error) {
@@ -38,7 +38,7 @@ const SellerDetailPage = () => {
 
   const handleSave = async () => {
     try {
-      const res = await axios.put(`/api/user/update-seller-info/${id}`, formData);
+      const res = await apiClient.put(`/api/user/update-seller-info/${id}`, formData);
       toast.success('Information updated successfully!');
       setIsEditing(false);
     } catch (error) {

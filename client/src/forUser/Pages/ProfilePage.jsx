@@ -8,7 +8,7 @@ import { userAuth } from '../../contextAPI/authContext';
 import SellerMainPage from '../../forSeller/pages/SellerMainPage';
 import SellerDashBord from '../../forSeller/pages/SellerDashBord';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../../apiClient';
 
 const ProfilePage = () => {
     const {authUser}=userAuth();
@@ -23,10 +23,10 @@ const ProfilePage = () => {
         const fetchUserProfile = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('/api/user/profile');
+                const response = await apiClient.get('/api/user/profile');
                 setLoading(false);
                 setUser(response.data);
-                const notification = await axios.get('/api/user/application-status');
+                const notification = await apiClient.get('/api/user/application-status');
                 setNotify(notification.data);
             } catch (error) {
                 setLoading(false);

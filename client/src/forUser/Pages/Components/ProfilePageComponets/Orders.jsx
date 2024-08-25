@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
+import apiClient from '../../../../apiClient';
 
 const Orders = ({ user }) => {
     const naviagte = useNavigate();
@@ -12,7 +12,7 @@ const Orders = ({ user }) => {
         const fetchOrders = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`/api/order/myorders/${user._id}`);
+                const response = await apiClient.get(`/api/order/myorders/${user._id}`);
                 setOrders(response.data);
             } catch (error) {
                 toast.error(error.response.data.message);

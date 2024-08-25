@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import { userAuth } from '../../../../contextAPI/authContext';
-import axios from 'axios';
+import apiClient from '../../../../apiClient';
 
 
 const AccountSettings = () => {
@@ -11,7 +11,7 @@ const AccountSettings = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('/api/auth/logout');
+            await apiClient.post('/api/auth/logout');
             toast.success('Logged out successfully');
             navigate('/')
         } catch (error) {

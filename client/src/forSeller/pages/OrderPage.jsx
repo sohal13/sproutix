@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { FaCheckCircle, FaTimesCircle, FaBoxOpen, FaFilter, FaSearch, FaEye, FaPhone } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import apiClient from '../../apiClient';
 
 const OrderPage = () => {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('/api/order/seller/orders'); // Replace with your actual endpoint
+        const response = await apiClient.get('/api/order/seller/orders'); // Replace with your actual endpoint
         setOrders(response.data);
       } catch (error) {
         console.error('Error fetching orders:', error);
@@ -35,7 +35,7 @@ const OrderPage = () => {
       if (confirmed) {
         try {
           // Assuming you have an API endpoint to update the order status
-          await axios.put(`/api/seller/orders/${selectedOrderId}/status`, { status: selectedStatus });
+          await apiClient.put(`/api/seller/orders/${selectedOrderId}/status`, { status: selectedStatus });
           setOrders((prevOrders) =>
             prevOrders.map((order) =>
               order._id === selectedOrderId ? { ...order, status: selectedStatus } : order
