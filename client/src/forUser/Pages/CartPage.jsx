@@ -4,7 +4,7 @@ import LoadingSpinner from '../../components/LoadingSpinner';// Import your Load
 import { toast } from 'react-toastify';
 import CheckoutPageButton from './Components/CheckOutComponents/CheckOutPageButton';
 import Layout from './Components/Layout/Layout';
-import axios from 'axios';
+import apiClient from '../../apiClient';
 
 
 const CartPage = () => {
@@ -16,7 +16,7 @@ const CartPage = () => {
   // Fetch cart data from the backend
   const fetchCart = async () => {
     try {
-      const response = await axios.get('/api/cart/get'); // 
+      const response = await apiClient.get('/api/cart/get'); // 
       setCart(response.data);
     } catch (err) {
       toast.error(err.response.data.message);
@@ -31,7 +31,7 @@ const CartPage = () => {
 
   const handleUpdateQuantity = async (productId, quantity) => {
     try {
-      await axios.put('/api/cart/update', { productId, quantity }); 
+      await apiClient.put('/api/cart/update', { productId, quantity }); 
       fetchCart(); 
     } catch (err) {
       toast.error('Failed to update quantity');
@@ -41,7 +41,7 @@ const CartPage = () => {
   const handleRemoveItem = async (productId) => {
     try {
         // Send the productId in the request body for DELETE requests
-        const response = await axios.delete('/api/cart/remove', {
+        const response = await apiClient.delete('/api/cart/remove', {
             data: { productId } // Use 'data' to send request body in DELETE request
         });
         fetchCart(); // Refresh cart data after removal
@@ -53,7 +53,7 @@ const CartPage = () => {
 
   const handleClearCart = async () => {
     try {
-      await axios.delete('/api/cart/clear'); 
+      await apiClient.delete('/api/cart/clear'); 
       fetchCart(); // Refresh cart data after clearing
     } catch (err) {
       toast.error('Failed to clear cart');
@@ -62,7 +62,7 @@ const CartPage = () => {
 
   const handleApplyCoupon = async () => {
     try {
-      await axios.post('/api/cart/apply-coupon', { couponCode }); 
+      await apiClient.post('/api/cart/apply-coupon', { couponCode }); 
       fetchCart(); // Refresh cart data after applying coupon
       setCouponCode('');
     } catch (err) {
@@ -72,7 +72,7 @@ const CartPage = () => {
 
   const handleRemoveCoupon = async () => {
     try {
-      await axios.post('/api/cart/remove-coupon'); // Replace with your API endpoint
+      await apiClient.post('/api/cart/remove-coupon'); // Replace with your API endpoint
       fetchCart(); // Refresh cart data after removing coupon
     } catch (err) {
       toast.error('Failed to remove coupon');

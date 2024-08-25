@@ -25,7 +25,7 @@ const connectToDB = async () => {
 
 // Configure CORS for production
 const allowedOrigins = [
-  'https://sproutix.vercel.app',
+  'https://sproutix-sohal-rahamans-projects.vercel.app',
   'http://localhost:5173', // Optional: Include your local development URL
 ];
 
