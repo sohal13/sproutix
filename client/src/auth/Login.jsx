@@ -1,10 +1,10 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
 import { userAuth } from '../contextAPI/authContext';
 import { Link } from 'react-router-dom'
+import apiClient from '../apiClient';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`/api/auth/login`, formData);
+      const response = await apiClient.post(`/api/auth/login`, formData);
       const { token, user } = response.data;
       localStorage.setItem('plantebuy_user', JSON.stringify(user));
       // Save token in cookies

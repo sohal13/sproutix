@@ -1,8 +1,8 @@
 // src/pages/Register.jsx
 import React, { useState } from 'react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
+import apiClient from '../apiClient';
 
 
 const Register = () => {
@@ -28,7 +28,7 @@ const Register = () => {
     if(formData.password !== formData.confpassword) return toast.error("Password Not Matching!!")
     setLoading(true);
     try {
-      const response = await axios.post(`/api/auth/register`, formData);
+      const response = await apiClient.post(`/api/auth/register`, formData);
       toast.success('Registration successful!');
       navigate('/login')
     } catch (error) {
