@@ -52,7 +52,7 @@ export const userLogin=async(req,res,next)=>{
         res.cookie("plantebuy_token",token,{
             expires:new Date(Date.now() + 258920000000),
             httpOnly:true,
-            secure: false, // Adjust for production
+            secure: true, // Adjust for production
             sameSite: 'None',
             path: '/' ,// Ensure accessibility
             maxAge: 1000 * 60 * 60 * 24 * 730, // 2 years
