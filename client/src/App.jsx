@@ -24,6 +24,7 @@ import SellerApplicationForm from "./forUser/Pages/Components/ProfilePageCompone
 import PostSellerDetails from "./forSeller/pages/PostSellerDetails";
 import SellerDetailPage from "./forSeller/pages/SellerDetailPage";
 import ISSeller from "./auth/verify/ISSelle";
+import NotFoundPage from "./forUser/Pages/Components/Layout/404Page";
 
 function App() {
  
@@ -31,6 +32,7 @@ function App() {
   return (
     <>
     <Routes>
+    <Route path="*" element={<NotFoundPage/>}/>
       <Route path="" element={<Home/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/login" element={<Login/>}/>

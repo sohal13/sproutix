@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaTrash, FaEye, FaPlus, FaSearch, FaFilter } from 'react-icons/fa';
 
 import { Link } from 'react-router-dom';
+import apiClient from '../../apiClient';
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ const ManageProducts = () => {
     });
 
     useEffect(() => {
-        axios.get('/api/product/mylisting')
+        apiClient.get('/api/product/mylisting')
             .then((response) => {
                 setProducts(response.data);
                 setFilteredProducts(response.data);

@@ -48,16 +48,16 @@ const Navbar = () => {
         <ul className="hidden md:flex space-x-2 items-center">
           <li className="bg-white text-green-600 px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
             <FaHome className="mr-2" />
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li className="bg-white text-green-600 px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
             <FaTags className="mr-2" />
-            <a href="/category">Category</a>
+            <Link to="/category">Category</Link>
           </li>
 
           <li className="bg-white text-green-600 px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
             <FaShoppingCart className="mr-2" />
-            <a href="/user/cart">Cart</a>
+            <Link to="/user/cart">Cart</Link>
           </li>
         </ul>
 
@@ -75,7 +75,7 @@ const Navbar = () => {
           ) : (
             <div className='ml-2 animate-bounce'>
             <li className="bg-green-800 text-black px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
-                <a href="/login">Login</a>
+                <Link to="/login">Login</Link>
             </li>
             </div>
            
@@ -117,23 +117,23 @@ const Navbar = () => {
         <ul className="space-y-3 mt-4 p-1">
           <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaHome className="mr-2" />
-            <a href="/">Home</a>
+            <Link to ="/">Home</Link>
           </li>
           <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaShopify className="mr-2" />
-            <a href="/shop">Shop</a>
+            <Link to="/shop">Shop</Link>
           </li>
           <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaTags className="mr-2" />
-            <a href="/category">Category</a>
+            <Link to="/category">Category</Link>
           </li>
           <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaEnvelope className="mr-2" />
-            <a href="/co ntact">Contact</a>
+            <Link to="/co ntact">Contact</Link>
           </li>
           <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaShoppingCart className="mr-2" />
-            <a href="/user/cart">Cart</a>
+            <Link to="/user/cart">Cart</Link>
           </li>
           {isLoggedIn ? (
             <Link to={'/user/profile'} className="flex items-center py-2 px-4 hover:bg-green-600 cursor-pointer">
@@ -145,7 +145,7 @@ const Navbar = () => {
               <span>Profile</span>
             </Link>
           ) : (
-            <li><a href="/login" className="block py-2 px-4 hover:bg-green-600 cursor-pointer">Login</a></li>
+            <li><Link to="/login" className="block py-2 px-4 hover:bg-green-600 cursor-pointer">Login</Link></li>
           )}
         </ul>
       </div>
