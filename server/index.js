@@ -49,20 +49,21 @@ app.use(express.json());
 
 // Use compression middleware
 app.use(compression({ 
-  level: 6, // Compression level (default is 6)
-  threshold: 0, // Compress all sizes of files (0 threshold)
-  filter: (req, res) => {
-    if (req.headers['x-no-compression']) {
-      return false;
-    }
-    return compression.filter(req, res);
-  }
+  level: 6, 
+  threshold: 1024, // Compress files only if they are above 1KB
 }));
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).json({ success: false, message: err.message });
 });
+
+// Health Check Endpoint
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.use('/api/auth',authRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/product',productRoutes)
@@ -78,7 +79,6 @@ app.use((err,req,res,next)=>{
     return res.status(errStatus).send({
         success:false,
         message:errMessage,
-        stack:err.stack
     })
 })
 

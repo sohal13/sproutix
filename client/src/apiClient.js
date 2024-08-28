@@ -1,9 +1,10 @@
 // src/utils/axios.js
 import axios from 'axios';
+console.log(import.meta.env.VITE_API_BASE_URL);
 
 // Create an instance of Axios
 const apiClient = axios.create({
-  baseURL: 'https://sproutix-backend.onrender.com',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true, // This ensures cookies are sent with requests
 });
 
