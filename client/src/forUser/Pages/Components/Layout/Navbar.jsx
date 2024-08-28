@@ -1,17 +1,20 @@
 // src/components/Navbar.jsx
 import React, { useEffect, useState } from 'react';
-import { FaBars, FaTimes, FaShoppingCart, FaUserCircle, FaHome, FaShopify, FaEnvelope, FaTags, FaSearch } from 'react-icons/fa';
+import { FaBars,FaShoppingCart, FaHome, FaTags, FaSearch, FaTimes, FaShopify, FaEnvelope } from 'react-icons/fa';
 import { userAuth } from '../../../../contextAPI/authContext';
 import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import apiClient from '../../../../apiClient';
 
 const Navbar = () => {
-  const {authUser } = userAuth();
+  const { authUser } = userAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const isLoggedIn = authUser ? true : false; // Change this value based on your authentication logic
 
   const toggleSidebar = () => {
@@ -22,9 +25,36 @@ const Navbar = () => {
 
   const handleSearch = (e) => {
     if (searchTerm.trim()) {
-        navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+      navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
     }
-};
+  };
+
+  // Fetch suggestions
+  const fetchSuggestions = async (query) => {
+    if (query) {
+      try {
+        const response = await apiClient.get(`/api/product/search-suggestions?query=${query}`);
+        setSuggestions(response.data);
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      }
+    } else {
+      setSuggestions([]); // Clear suggestions if the query is empty
+    }
+  };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      fetchSuggestions(searchTerm); // Fetch suggestions when searchTerm changes
+    }, 300); // Delay of 300ms
+
+    return () => clearTimeout(delayDebounceFn); // Cleanup
+  }, [searchTerm]);
+
+  const hadelSetSuggestion=(id) => {
+    setSuggestions([])
+    navigate(`/product/${id}`)
+  }
   return (
     <header className="bg-green-700 text-white">
       <nav className="container mx-auto p-4 flex justify-between items-center">
@@ -33,15 +63,28 @@ const Navbar = () => {
           SproutiX
         </Link>
 
-        {/* Search Bar for Large Screens */} 
-        <div className="hidden md:flex flex-1 mx-8 items-center bg-white rounded-full">
+        {/* Search Bar for Large Screens */}
+        <div className="hidden md:flex flex-1 mx-8 items-center bg-white rounded-full relative">
           <input
             type="text"
             placeholder="Search for plants..."
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full py-2 px-4 text-green-900 outline-none bg-transparent"
           />
-           <FaSearch onClick={handleSearch} className="mr-2 text-green-800 cursor-pointer" />
+          <FaSearch onClick={handleSearch} className="mr-2 text-green-800 cursor-pointer" />
+
+          {/* Suggestions Dropdown */}
+          {suggestions.length > 0 && (
+            <div className="absolute z-10 bg-green-100 rounded-md shadow-lg w-full top-10 text-black">
+              <ul>
+                {suggestions.map((suggestion) => (
+                  <li key={suggestion._id} className="px-4 py-2 hover:bg-gray-200 cursor-pointer shadow-sm" onClick={()=>hadelSetSuggestion(suggestion._id)}>
+                    {suggestion.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Links for large screens */}
@@ -52,7 +95,7 @@ const Navbar = () => {
           </li>
           <li className="bg-white text-green-600 px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
             <FaTags className="mr-2" />
-            <Link to="/category">Category</Link>
+            <Link to="/categories">Category</Link>
           </li>
 
           <li className="bg-white text-green-600 px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
@@ -74,11 +117,11 @@ const Navbar = () => {
             </Link>
           ) : (
             <div className='ml-2 animate-bounce'>
-            <li className="bg-green-800 text-black px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
+              <li className="bg-green-800 text-black px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
                 <Link to="/login">Login</Link>
-            </li>
+              </li>
             </div>
-           
+
           )}
         </div>
 
@@ -90,17 +133,29 @@ const Navbar = () => {
 
       {/* Search Bar for Mobile Screens */}
       <div className='px-4 py-1'>
-      <div className="md:hidden flex items-center  bg-white rounded-full">
-        <input
-          type="text"
-          placeholder="Search for plants..."
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full py-2 px-4 text-green-900 outline-none bg-transparent"
-        />
-         <FaSearch onClick={handleSearch} className="text-green-800 mr-2 cursor-pointer " />
-      </div>
-      </div>
+        <div className="md:hidden flex items-center bg-white rounded-full relative">
+          <input
+            type="text"
+            placeholder="Search for plants..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full py-2 px-4 text-green-900 outline-none bg-transparent"
+          />
+          <FaSearch onClick={handleSearch} className="text-green-800 mr-2 cursor-pointer" />
 
+          {/* Suggestions Dropdown */}
+          {suggestions.length > 0 && (
+            <div className="absolute z-10 bg-green-100 shadow-lg rounded  w-full top-10">
+              <ul>
+                {suggestions.map((suggestion) => (
+                  <li key={suggestion._id} className="px-4 py-2 text-black hover:bg-gray-200 cursor-pointer shadow-sm" onClick={()=>hadelSetSuggestion(suggestion._id)}>
+                    {suggestion.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Sidebar for mobile */}
       <div
@@ -123,9 +178,9 @@ const Navbar = () => {
             <FaShopify className="mr-2" />
             Shop
           </li></Link>
-          <Link to="/category"> <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
+          <Link to="/categories"> <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaTags className="mr-2" />
-           Category
+           Categories
           </li></Link>
           <Link to="/contact"><li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaEnvelope className="mr-2" />

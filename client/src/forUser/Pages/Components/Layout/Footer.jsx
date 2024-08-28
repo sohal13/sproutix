@@ -10,9 +10,9 @@ const Footer = () => {
           
           {/* About Section */}
           <div>
-            <h3 className="text-lg font-bold mb-4">About PlantSell</h3>
+            <h3 className="text-lg font-bold mb-4">About SproutiX</h3>
             <p className="text-sm">
-              PlantSell connects local plant sellers with buyers, offering a wide variety of plants for every type of gardener. Join our community to explore a rich selection of greenery.
+              SproutiX connects local plant sellers with buyers, offering a wide variety of plants for every type of gardener. Join our community to explore a rich selection of greenery.
             </p>
           </div>
 
@@ -34,15 +34,15 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center">
                 <FaMapMarkerAlt className="mr-2" />
-                <span>123 Plant Street, Green City, 45678</span>
+                <span>Guma, Habra ,Kolkata, 743704</span>
               </li>
               <li className="flex items-center">
                 <FaPhoneAlt className="mr-2" />
-                <span>+91 9876543210</span>
+                <span>+91 9933717360</span>
               </li>
               <li className="flex items-center">
                 <FaEnvelope className="mr-2" />
-                <span>info@plantsell.com</span>
+                <span>sohalr1305@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -51,16 +51,16 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-green-300"><FaFacebookF size={24} /></a>
-              <a href="#" className="hover:text-green-300"><FaInstagram size={24} /></a>
-              <a href="#" className="hover:text-green-300"><FaTwitter size={24} /></a>
-              <a href="#" className="hover:text-green-300"><FaLinkedinIn size={24} /></a>
+              <a href="https://www.facebook.com/sohal.rahaman.338" className="hover:text-green-300"><FaFacebookF size={24} /></a>
+              <a href="https://www.instagram.com/sohal_rahaman_" className="hover:text-green-300"><FaInstagram size={24} /></a>
+              <a href="https://x.com/sohal_rahaman_" className="hover:text-green-300"><FaTwitter size={24} /></a>
+              <a href="https://www.linkedin.com/in/sohal-rahaman-540941245/" className="hover:text-green-300"><FaLinkedinIn size={24} /></a>
             </div>
           </div>
         </div>
 
         <div className="text-center text-sm text-green-300 mt-8">
-          © 2024 PlantSell. All rights reserved.
+          © 2024 SproutiX. All rights reserved.
         </div>
       </div>
     </footer>

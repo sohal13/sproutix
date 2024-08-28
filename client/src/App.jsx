@@ -25,6 +25,8 @@ import PostSellerDetails from "./forSeller/pages/PostSellerDetails";
 import SellerDetailPage from "./forSeller/pages/SellerDetailPage";
 import ISSeller from "./auth/verify/ISSelle";
 import NotFoundPage from "./forUser/Pages/Components/Layout/404Page";
+import CategoryPage from "./forUser/Pages/CategoryPage";
+import CategoryProduct from "./forUser/Pages/CategoriesProduct";
 
 function App() {
  
@@ -38,6 +40,8 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/product/:id" element={<SingleProduct/>}/>
       <Route path="/search" element={<SearchPage/>}/>
+      <Route path="/categories" element={<CategoryPage/>} />
+      <Route path="/categories/:id" element={<CategoryProduct/>} />
 
       <Route path="/user" element={<ISUser/>}>
       <Route path="profile" element={<ProfilePage/>}/>

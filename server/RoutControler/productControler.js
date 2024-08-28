@@ -75,6 +75,11 @@ export const searchProducts = async (req, res, next) => {
       featured
     } = req.query;
 
+    // Validate and sanitize sortBy field
+    const validSortFields = ['name', 'price', 'createdAt', 'ratings.average'];
+    const sortField = validSortFields.includes(sortBy) ? sortBy : 'createdAt';
+    const sortOrder = order === 'asc' ? 1 : -1;
+
     // Building filter conditions
     const filterConditions = {};
 
@@ -103,16 +108,14 @@ export const searchProducts = async (req, res, next) => {
 
     // Pagination and Sorting
     const skip = (page - 1) * limit;
-    const sortOrder = order === 'asc' ? 1 : -1;
-
-    // Fetch products
-    const products = await Product.find(filterConditions)
-      .skip(skip)
-      .limit(Number(limit))
-      .sort({ [sortBy]: sortOrder });
-
-    // Total products count for pagination
-    const totalProducts = await Product.countDocuments(filterConditions);
+    const [products, totalProducts] = await Promise.all([
+      Product.find(filterConditions)
+        .skip(skip)
+        .limit(Number(limit))
+        .sort({ [sortField]: sortOrder })
+        .lean(), // Use lean() for better performance
+      Product.countDocuments(filterConditions)
+    ]);
 
     res.json({
       total: totalProducts,
@@ -123,7 +126,25 @@ export const searchProducts = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
+
+export const getSuggestions = async (req, res, next) => {
+  try {
+    const { query } = req.query;
+
+    // Using RegExp for case-insensitive search of product names
+    const suggestions = await Product.find({
+      name: new RegExp(query, 'i') // Matches any part of the product name
+    })
+      .limit(5) // Limit the number of suggestions
+      .select('name _id'); // Select only the fields needed
+
+    res.status(200).json(suggestions);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 export const getRelatedProducts = async (req, res, next) => {
   const productId = req.params.id;
@@ -217,3 +238,5 @@ export const showFeaturedProduct = async (req, res, next) => {
     next(error);
   }
 };
+
+

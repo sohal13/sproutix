@@ -6,6 +6,7 @@ import userRouter from './Router/user.js'
 import productRoutes from './Router/product.js'
 import cartRouter from './Router/cart.js'
 import orderRouter from './Router/order.js'
+import catgeoryRouter from './Router/category.js'
 import stripewebhookRouter from './Router/stripewebhook.js'; 
 import paymentRouter from './Router/payment.js'
 import cookieParser from "cookie-parser";
@@ -65,6 +66,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth',authRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/product',productRoutes)
+app.use('/api/categories',catgeoryRouter)
 app.use('/api/user',userRouter)
 app.use('/api/payment',paymentRouter)
 app.use('/api/order',orderRouter)

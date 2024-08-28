@@ -1,5 +1,5 @@
 import express from "express"
-import { getMyListing, getRelatedProducts, getSingleListing, listProduct, searchProducts, showFeaturedProduct } from "../RoutControler/productControler.js";
+import { getMyListing, getRelatedProducts, getSingleListing, getSuggestions, listProduct, searchProducts, showFeaturedProduct } from "../RoutControler/productControler.js";
 import { verifySeller, verifyUser } from "../utils/verifyUser.js";
 
 const router = express.Router();
@@ -11,6 +11,8 @@ router.get('/mylisting',verifyUser,verifySeller,getMyListing)
 router.get('/this/:id',getSingleListing);
 
 router.get('/search', searchProducts);
+
+router.get('/search-suggestions', getSuggestions);
 
 router.get("/related/:id", getRelatedProducts);
 
