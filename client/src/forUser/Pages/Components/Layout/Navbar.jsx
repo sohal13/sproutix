@@ -26,7 +26,7 @@ const Navbar = () => {
     }
 };
   return (
-    <header className="bg-green-600 text-white">
+    <header className="bg-green-700 text-white">
       <nav className="container mx-auto p-4 flex justify-between items-center">
         {/* Logo */}
         <Link to={'/'} className="text-2xl font-bold">
