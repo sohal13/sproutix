@@ -115,32 +115,32 @@ const Navbar = () => {
           <FaTimes size={24} onClick={toggleSidebar} className="cursor-pointer" />
         </div>
         <ul className="space-y-3 mt-4 p-1">
-          <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
+        <Link to ="/"><li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaHome className="mr-2" />
-            <Link to ="/">Home</Link>
-          </li>
-          <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
+            Home
+          </li></Link>
+          <Link to="/shop"><li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaShopify className="mr-2" />
-            <Link to="/shop">Shop</Link>
-          </li>
-          <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
+            Shop
+          </li></Link>
+          <Link to="/category"> <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaTags className="mr-2" />
-            <Link to="/category">Category</Link>
-          </li>
-          <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
+           Category
+          </li></Link>
+          <Link to="/contact"><li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaEnvelope className="mr-2" />
-            <Link to="/co ntact">Contact</Link>
-          </li>
-          <li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
+            Contact
+          </li></Link>
+          <Link to="/user/cart"><li className="py-2 px-4 hover:bg-green-600 cursor-pointer flex items-center">
             <FaShoppingCart className="mr-2" />
-            <Link to="/user/cart">Cart</Link>
-          </li>
+            Cart
+          </li></Link>
           {isLoggedIn ? (
             <Link to={'/user/profile'} className="flex items-center py-2 px-4 hover:bg-green-600 cursor-pointer">
               <img
                 src={authUser?.photo}
                 alt="User"
-                className="w-8 h-8 rounded-full mr-2"
+                className="w-8 h-8 rounded-full mr-2 object-cover"
               />
               <span>Profile</span>
             </Link>
