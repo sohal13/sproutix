@@ -51,6 +51,7 @@ const CategoryPage = () => {
                 <img
                   src={category.image}
                   alt={category.category}
+                  loading="lazy"
                   className="w-full h-48 object-cover transition-opacity duration-300 ease-in-out hover:opacity-80"
                 />
               ) : (
