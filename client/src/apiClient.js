@@ -1,6 +1,5 @@
 // src/utils/axios.js
 import axios from 'axios';
-console.log(import.meta.env.VITE_API_BASE_URL);
 
 // Create an instance of Axios
 const apiClient = axios.create({
