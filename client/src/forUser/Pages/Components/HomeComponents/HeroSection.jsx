@@ -4,7 +4,7 @@ import React from 'react';
 const HeroSection = () => {
   return (
     <section className="relative p-8 flex flex-col md:flex-row items-center bg-cover bg-center bg-no-repeat min-h-96"
-    style={{ backgroundImage:"url('/images/background.jpg')"}}>
+    style={{ backgroundImage:"url('/images/herobg.jpg')"}}>
       {/* Text and Buttons */}
       <div className="flex-1 text-center md:text-left inset-0">
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
