@@ -116,7 +116,7 @@ const CartPage = () => {
               <tbody>
                 {cart?.items?.map((item) => (
                   <tr key={item.productId}>
-                    <td className="py-4 px-4 flex items-center" onClick={()=>navigate(`/product/${item.productId}`)}>
+                    <td className="py-4 px-4 flex items-center" onClick={()=>navigate(`/product/₹{item.productId}`)}>
                       <img src={item?.image[0]} alt={item.name} className="w-16 h-16 object-cover rounded-md mr-4" />
                     </td>
                     <td className="py-4 px-4">{item.name}</td>
@@ -130,7 +130,7 @@ const CartPage = () => {
                         onChange={(e) => handleUpdateQuantity(item.productId, +e.target.value)}
                       />
                     </td>
-                    <td className="py-4 px-4">${item.subtotal.toFixed(2)}</td>
+                    <td className="py-4 px-4">₹{item.subtotal.toFixed(2)}</td>
                     <td className="py-4 px-4">
                       <button
                         className="text-red-500 hover:text-red-700"
@@ -173,11 +173,11 @@ const CartPage = () => {
               </div>
 
               <div>
-                <p className="text-lg font-semibold">Subtotal: ${cart?.totalAmount?.toFixed(2)}</p>
+                <p className="text-lg font-semibold">Subtotal: ₹{cart?.totalAmount?.toFixed(2)}</p>
                 {cart.discount > 0 && (
-                  <p className="text-lg font-semibold text-green-500">Discount: -${cart?.discount?.toFixed(2)}</p>
+                  <p className="text-lg font-semibold text-green-500">Discount: -₹{cart?.discount?.toFixed(2)}</p>
                 )}
-                <p className="text-xl font-bold">Total: ${cart?.finalAmount?.toFixed(2)}</p>
+                <p className="text-xl font-bold">Total: ₹{cart?.finalAmount?.toFixed(2)}</p>
               </div>
             </div>
 

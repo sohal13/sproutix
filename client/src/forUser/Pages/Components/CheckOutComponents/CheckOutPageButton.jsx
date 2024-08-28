@@ -29,6 +29,7 @@ const CheckoutPageButton = ({product}) => {
         user: authUser,// Adjust as needed
       });
       // Redirect to Stripe Checkout
+      setLoading(false)
       const { url } = response.data;
       window.location.href = url;
       try {
@@ -37,6 +38,7 @@ const CheckoutPageButton = ({product}) => {
           action:'purchase',
       });
        } catch (error) {
+        setLoading(false)
         console.error(error?.response?.data?.message);
        }
     } catch (error) {
