@@ -12,6 +12,8 @@ const AccountSettings = () => {
     const handleLogout = async () => {
         try {
             await apiClient.post('/api/auth/logout');
+            localStorage.removeItem('plantebuy_user');
+            document.cookie = 'plantebuy_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             toast.success('Logged out successfully');
             navigate('/')
         } catch (error) {
