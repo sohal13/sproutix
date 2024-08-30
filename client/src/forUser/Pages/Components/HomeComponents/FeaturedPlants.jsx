@@ -33,7 +33,7 @@ const FeaturedPlants = () => {
     }
   }
   return (
-    <section className="p-8 bg-white shadow-md">
+    <section className="p-8 bg-gray-100 shadow-md">
       <h2 className="text-2xl font-bold mb-4">Featured Plants</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {loading ? (<LoadingSpinner/>):(

@@ -252,7 +252,7 @@ const sendApprovalEmail = async (seller) => {
           <p>We are thrilled to have you on board. Your journey to success starts now! 🚀</p>
           <p>Please click the button below to log in to your dashboard and complete your profile. Once completed, you can start listing your products and begin selling.</p>
           <div style="text-align: center; margin: 30px 0;">
-            <a href=${`https://sproutix.vercel.app/seller/sellerdetails/${seller._id}`}
+            <a href=${`https://sproutix.vercel.app/seller/updatedetails/${seller._id}`}
                style="background-color: #4CAF50; color: white; padding: 15px 30px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 18px;">Go to Your Dashboard</a>
           </div>
           <p>Thank you for choosing to partner with us. We look forward to a successful collaboration!</p>

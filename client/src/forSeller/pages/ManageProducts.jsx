@@ -26,7 +26,7 @@ const ManageProducts = () => {
                 setLoading(false);
             })
             .catch((error) => {
-                toast.error("Failed to load products");
+                toast.error(error.response.data.message);
                 setLoading(false);
             });
     }, []);

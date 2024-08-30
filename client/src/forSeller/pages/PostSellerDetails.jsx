@@ -297,7 +297,6 @@ const UpdateSellerForm = () => {
                         />
                     </label>
                 </div>
-
                 {/* Submit Button */}
                 <div>
                     <button

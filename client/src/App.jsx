@@ -60,8 +60,8 @@ function App() {
       <Route path="manageproduct" element={<ManageProducts/>}/>
       <Route path="orders" element={<OrderPage/>}/>
       <Route path="orders/detail/:id" element={<OrderDetail/>}/>
-        <Route path="list" element={<ListProduct/>}/>
-        <Route path="notification" element={<Notification/>}/>
+      <Route path="list" element={<ListProduct/>}/>
+      <Route path="notification" element={<Notification/>}/>
       </Route>
     </Routes>
     </>

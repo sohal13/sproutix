@@ -117,7 +117,7 @@ const Navbar = () => {
             </Link>
           ) : (
             <div className='ml-2 animate-bounce'>
-              <li className="bg-green-800 text-black px-4 py-2 rounded-full hover:bg-gray-200 cursor-pointer flex items-center">
+              <li className="bg-green-900 text-yellow-500 px-4 py-2 rounded-full hover:bg-green-800 cursor-pointer flex items-center">
                 <Link to="/login">Login</Link>
               </li>
             </div>

@@ -21,7 +21,7 @@ const Orders = ({ user }) => {
             }
         };
         fetchOrders();
-    }, []);
+    }, [user]);
 
     const renderOrderSummary = () => (
         <div className="p-4 bg-white shadow-lg rounded-lg">
