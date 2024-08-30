@@ -4,6 +4,7 @@ const ProductReviews = ({ reviews }) => {
   return (
     <div className="mt-8">
       <h2 className="text-xl font-semibold mb-4">Customer Reviews</h2>
+      <p className='text-red-500'>WORKING ON CUSTOMER REVIEW "IN DEVLOPMENT"</p>
       {reviews.map((review, index) => (
         <div key={index} className="mb-4">
           <h3 className="font-bold">{review.user.name}</h3>

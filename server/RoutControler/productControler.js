@@ -156,14 +156,14 @@ export const getRelatedProducts = async (req, res, next) => {
     const categoryRelatedProducts = await Product.find({
       category: currentProduct.category,
       _id: { $ne: productId } // Exclude the current product
-    }).limit(3); // Limit to 3 related products
+    }).limit(5); // Limit to 3 related products
     // Attribute Matching (e.g., similar light and water requirements)
     const attributeMatchedProducts = await Product.find({
       _id: { $ne: productId }, // Exclude the current product
       lightRequirement: currentProduct.lightRequirement,
       waterRequirement: currentProduct.waterRequirement,
       category: currentProduct.category
-    }).limit(2);
+    }).limit(5);
     // Combine all related products and avoid duplicates
     const combinedProducts = [...categoryRelatedProducts, ...attributeMatchedProducts];
     // Remove duplicates
