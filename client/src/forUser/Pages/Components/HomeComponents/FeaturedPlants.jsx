@@ -13,7 +13,7 @@ const FeaturedPlants = () => {
   const [loading, setLoading] = useState(false);
   useEffect(()=>{
     getfeaturedfeatured();
-  },[])
+  },[authUser])
 
   const getfeaturedfeatured=async()=>{
     setLoading(true)

@@ -3,8 +3,10 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section className="relative p-8 flex flex-col md:flex-row items-center bg-cover bg-center bg-no-repeat min-h-96"
-    style={{ backgroundImage:"url('/images/herobg.jpg')"}}>
+    <section className="relative p-8 flex flex-col md:flex-row items-center w-full h-96"
+    style={{ backgroundImage:"url('/images/herobg.jpg')" ,backgroundSize: "cover", // Or "contain" depending on the desired effect
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",}}>
       {/* Text and Buttons */}
       <div className="flex-1 text-center md:text-left inset-0">
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
@@ -17,7 +19,7 @@ const HeroSection = () => {
           <button className="bg-green-900 text-white py-2 px-6 rounded-full mb-2 md:mb-0 md:mr-4 hover:bg-green-700">
             Shop Now
           </button>
-          <button className="bg-white text-green-600 border border-green-600 py-2 px-6 rounded-full hover:bg-green-50">
+          <button  className="bg-white text-green-600 border border-green-600 py-2 px-6 rounded-full hover:bg-green-50">
             Let's Go
           </button>
         </div>
