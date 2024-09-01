@@ -1,5 +1,8 @@
 // controllers/productController.js
 import Product from '../Schema/productSchema.js';
+import SellerApplication from '../Schema/sellerApplicationSchema.js';
+import Seller from '../Schema/sellerSchema.js';
+import axios from 'axios'
 import UserActivity from '../Schema/userActivitySchema.js';
 import { createError } from '../utils/error.js';
 
@@ -48,6 +51,47 @@ export const getSingleListing = async (req, res, next) => {
     const product = await Product.findById({ _id: productId });
     if (!product) return next(createError(404, 'No products Exist'));
     res.status(200).json(product);
+  } catch (error) {
+    next(error)
+  }
+}
+
+const OPENCAGE_API_KEY = 'f3a631ca2e764211b7900b8981e22ae5';
+
+async function geocodeAddress(address) {
+  const formattedAddress = `${address.addressLine1}, ${address.addressLine2 || ''}, ${address.city}, ${address.state}, ${address.postalCode}`;
+  const response = await axios.get('https://api.opencagedata.com/geocode/v1/json', {
+    params: {
+      q: formattedAddress,
+      key: OPENCAGE_API_KEY,
+    },
+  });
+  const { lat, lng } = response.data.results[0].geometry;
+  return { latitude: lat, longitude: lng };
+}
+export const getExpectedDelivery=async(req,res,next)=>{
+  try {
+    const productId = req.params.id;
+    const product = await Product.findById({ _id: productId });
+    if (!product) return next(createError(404, 'No products Exist'));
+    const sellerApplicationId = await SellerApplication.findOne({userId:product.userId});
+    if(!sellerApplicationId) return next(createError(404, 'No Seller Application found'));
+    const seller = await Seller.findOne({sellerDetail:sellerApplicationId._id}).populate('sellerDetail');
+    if (!seller || !seller.sellerDetail) {
+      return res.status(404).json({ success: false, message: 'Seller or seller details not found' });
+    }
+    const sellerApplication = seller.sellerDetail;
+    const businessAddress = sellerApplication.businessAddress;
+
+    // Geocode the business address
+    const coordinates = await geocodeAddress(businessAddress);
+
+    res.status(200).json({
+      success: true,
+      coordinates: coordinates,
+      shippingMethods: seller.shippingMethods,
+      shippingPolicies: seller.shippingPolicies,
+    });
   } catch (error) {
     next(error)
   }

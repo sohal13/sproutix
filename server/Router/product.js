@@ -1,5 +1,5 @@
 import express from "express"
-import { getMyListing, getRelatedProducts, getSingleListing, getSuggestions, listProduct, searchProducts, showFeaturedProduct } from "../RoutControler/productControler.js";
+import { getExpectedDelivery, getMyListing, getRelatedProducts, getSingleListing, getSuggestions, listProduct, searchProducts, showFeaturedProduct } from "../RoutControler/productControler.js";
 import { verifySeller, verifyUser } from "../utils/verifyUser.js";
 
 const router = express.Router();
@@ -9,6 +9,8 @@ router.post('/list',verifyUser,verifySeller,listProduct)
 router.get('/mylisting',verifyUser,verifySeller,getMyListing)
 
 router.get('/this/:id',getSingleListing);
+
+router.get('/expected-delivery/:id',getExpectedDelivery)
 
 router.get('/search', searchProducts);
 

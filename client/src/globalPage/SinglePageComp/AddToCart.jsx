@@ -34,7 +34,7 @@ const AddToCart = ({ productId ,product}) => {
     <div className='flex justify-around'>
         <button
       onClick={handleAddToCart}
-      className="bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg mt-4"
+      className="bg-yellow-600 text-white font-bold py-1 px-4 rounded-lg mt-5 text-sm"
       disabled={loading}
     >
       {loading ? 'Adding...' : 'Add to Cart'}

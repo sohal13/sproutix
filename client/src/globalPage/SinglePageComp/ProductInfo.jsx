@@ -16,7 +16,7 @@ const renderStars = (averageRating) => {
   return stars;
 };
 
-const ProductInfo = ({ product }) => {
+const ProductInfo = ({ product,deliveryDate }) => {
 
   return (
     <div className="p-1">
@@ -36,6 +36,7 @@ const ProductInfo = ({ product }) => {
         <h2 className="font-semibold text-lg">Price</h2>
         <p className="text-green-600 text-xl font-bold">₹{product.price}</p>
       </div>
+      <h1 className='font-bold text-sm bg-gray-200 px-2'>Estimated Delivery Date {deliveryDate}</h1>
       {product.featured && (
         <div className="mb-1">
           <span className="px-2 py-1 bg-yellow-400 text-yellow-900 font-semibold rounded">Featured Product</span>

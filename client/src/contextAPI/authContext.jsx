@@ -10,6 +10,7 @@ export const userAuth=()=>{
 
 export const AuthContetProvider=({children})=>{
     const [authUser , setauthUser ] = useState(JSON.parse(localStorage.getItem("plantebuy_user")) || null)
+    const [authSeller , setauthSeller ] = useState(JSON.parse(localStorage.getItem("plantebuy_seller")) || null)
 
      // Function to check if the cookie exists
      const checkCookie = () => {
@@ -35,7 +36,7 @@ export const AuthContetProvider=({children})=>{
     }, []);
 
     return (
-        <AuthContext.Provider value={{authUser , setauthUser}}>
+        <AuthContext.Provider value={{authUser , setauthUser, authSeller, setauthSeller}}>
             {children}
         </AuthContext.Provider>
     );

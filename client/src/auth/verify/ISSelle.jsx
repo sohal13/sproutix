@@ -4,8 +4,6 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const ISSeller = () => {
     const {authUser} = userAuth();
-    console.log(authUser);
-   
   return (
     authUser?.isSeller === true ? <Outlet/> : <Navigate to={'/'}/>
   )

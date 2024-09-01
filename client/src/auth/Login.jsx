@@ -37,11 +37,46 @@ const Login = () => {
       const date = new Date(Date.now() + 258920000000); // 730 days for 2 years
       const expires = "expires=" + date.toUTCString();
       document.cookie = `plantebuy_token=${token}; path=/; ${expires}`;
+
+
+    // Geolocation Request
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+          
+          // Store location in cookies for later use
+          document.cookie = `user_location=${JSON.stringify({ latitude, longitude })}; path=/; ${expires}`;
+          
+          // Redirect based on user type
+          if (user.isSeller === false) {
+            const from = location.state?.from || '/';
+            navigate(from);
+          } else {
+            navigate('/seller');
+          }
+        },
+        (error) => {
+          console.error('Error fetching location:', error);
+          // Redirect even if location fetching fails
+          if (user.isSeller === false) {
+            const from = location.state?.from || '/';
+            navigate(from);
+          } else {
+            navigate('/seller');
+          }
+        }
+      );
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
       setauthUser(user)
       toast.success('Login successful!');
       if (user.isSeller === false) {
         const from = location.state?.from || '/';
         navigate(from);
+        
       }
       navigate('/seller')
     } catch (error) {

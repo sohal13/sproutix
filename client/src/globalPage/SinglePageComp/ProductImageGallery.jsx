@@ -47,10 +47,13 @@ const ProductImageGallery = ({ images, videoUrl, productId, product }) => {
   }, [selectedMedia, isVideo]);
 
   return (
-    <div className="w-full md:w-1/2">
+    <div className="w-full md:w-1/2 relative">
       <div className="hidden md:block w-full h-auto">
-        <div className="flex items-center justify-center h-80">
+        <div className="flex items-center justify-center h-80 relative">
           {renderMedia}
+          <div className='w-full absolute bottom-1'>
+      <AddToCart productId={productId} product={product} />
+      </div>
         </div>
         <div className="flex flex-wrap mt-4 space-x-4 md:space-x-0 md:grid md:grid-cols-4 md:gap-4">
           {images.map((img, index) => (
@@ -110,8 +113,10 @@ const ProductImageGallery = ({ images, videoUrl, productId, product }) => {
             </div>
           )}
         </Slider>
-      </div>
+        <div className='w-full absolute bottom-[-40px]'>
       <AddToCart productId={productId} product={product} />
+      </div>
+      </div>
     </div>
   );
 };
