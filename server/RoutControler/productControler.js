@@ -75,7 +75,7 @@ export const getExpectedDelivery=async(req,res,next)=>{
     const product = await Product.findById({ _id: productId });
     if (!product) return next(createError(404, 'No products Exist'));
     const sellerApplicationId = await SellerApplication.findOne({userId:product.userId});
-    if(!sellerApplicationId) return next(createError(404, 'No Seller Application found'));
+    if(!sellerApplicationId) return next(createError(404, 'delivery date not fixed'));
     const seller = await Seller.findOne({sellerDetail:sellerApplicationId._id}).populate('sellerDetail');
     if (!seller || !seller.sellerDetail) {
       return res.status(404).json({ success: false, message: 'Seller or seller details not found' });

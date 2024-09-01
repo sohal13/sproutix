@@ -35,28 +35,28 @@ const SingleProduct = () => {
       const productResponse = await apiClient.get(`/api/product/this/${id}`);
       setProduct(productResponse.data);
 
-      // Fetch seller details
-      const sellerResponse = await apiClient.get(`/api/product/expected-delivery/${id}`);
-      setSellerData(sellerResponse.data);
-
       // Fetch related products
       const relatedResponse = await apiClient.get(`/api/product/related/${id}`);
       setRelatedProducts(relatedResponse.data || []);
-
-      // After fetching important data, calculate delivery date
-      const userLocation = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)user_location\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
-      const distanceAndTime = await getDistanceAndTime(userLocation, sellerResponse.data.coordinates);
-      
-      // Calculate delivery date
-      const deliveryDate = calculateDeliveryDate(sellerResponse.data.shippingPolicies, distanceAndTime.duration);
-      setDeliveryDate(deliveryDate);
-      console.log("Estimated Delivery Date:", deliveryDate);
 
       // Track user activity
       await apiClient.post('/api/user/track-activity', {
         productId: id,
         action: 'view',
       });
+            // Fetch seller details
+            const sellerResponse = await apiClient.get(`/api/product/expected-delivery/${id}`);
+            setSellerData(sellerResponse.data);
+
+      // After fetching important data, calculate delivery date
+      const userLocation = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)user_location\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+      console.log(userLocation);
+      const distanceAndTime = await getDistanceAndTime(userLocation, sellerResponse.data.coordinates);
+      
+      // Calculate delivery date
+      const deliveryDate = calculateDeliveryDate(sellerResponse.data.shippingPolicies, distanceAndTime.duration);
+      setDeliveryDate(deliveryDate);
+      console.log("Estimated Delivery Date:", deliveryDate);
 
     } catch (error) {
       console.log(error);
@@ -79,7 +79,7 @@ const SingleProduct = () => {
       const data = await response.json();
       const segment = data.features[0].properties.segments[0];
       const duration = (segment.duration / 3600).toFixed(2); // Convert seconds to hours
-
+      console.log(duration);
       return {
         duration,
       };
