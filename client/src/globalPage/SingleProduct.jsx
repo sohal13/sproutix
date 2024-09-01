@@ -8,7 +8,6 @@ import Layout from '../forUser/Pages/Components/Layout/Layout';
 import RelatedProducts from './SinglePageComp/RelatedProducts';
 import { toast } from 'react-toastify';
 import apiClient from '../apiClient';
-import axios from 'axios'
 const SingleProduct = () => {
   const { id } = useParams();
   const [currentid, setcurrentid] = useState(id);
@@ -37,7 +36,7 @@ const SingleProduct = () => {
       setProduct(productResponse.data);
 
       // Fetch seller details
-      const sellerResponse = await axios.get(`/api/product/expected-delivery/${id}`);
+      const sellerResponse = await apiClient.get(`/api/product/expected-delivery/${id}`);
       setSellerData(sellerResponse.data);
 
       // Fetch related products
